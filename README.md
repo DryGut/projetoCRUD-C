@@ -10,7 +10,7 @@ Repositório de construção de um CRUD em linguagem C
     :construction:  Projeto em construção  :construction:
 </h4>
 
-<p style="font-family:courier,arial,helvetica">
+<p style="font-family:Cursive">
     CRUD em linguagem C
 </p>
 
