@@ -10,4 +10,7 @@ Repositório de construção de um CRUD em linguagem C
     :construction:  Projeto em construção  :construction:
 </h4>
 
-![funcionalidades] 🔨 o projeto ainda esta no início apenas com a parte de inserir dados 🔨
+CRUD em linguagem C
+
+| [<img src="https://avatars.githubusercontent.com/u/37356058?v=4" width=115><br><sub>Renato Magalhaes Martins</sub>](https://github.com/DryGut) |  [<img src="https://avatars.githubusercontent.com/u/30351153?v=4" width=115><br><sub>Marley Pinheiro Martins</sub>](https://github.com/marleypm16) | 
+| :---: | :---: | :---: |
