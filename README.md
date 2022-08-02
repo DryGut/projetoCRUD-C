@@ -10,4 +10,4 @@ Repositório de construção de um CRUD em linguagem C
     :construction:  Projeto em construção  :construction:
 </h4>
 
-:hamer: o projeto ainda esta no início apenas com a parte de inserir dados
+![funcionalidades] 🔨 o projeto ainda esta no início apenas com a parte de inserir dados 🔨
