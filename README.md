@@ -6,4 +6,8 @@ Repositório de construção de um CRUD em linguagem C
 ![c](https://img.shields.io/badge/Maracutaia-Estudando-red?style=plastic)
 ![badge começando](https://img.shields.io/badge/Status-Em%20Desenvolvimento-brightgreen?style=plastic)
 
+<h4 align="center"> 
+    :construction:  Projeto em construção  :construction:
+</h4>
 
+[funcionalidades do projeto] :hamer: o projeto ainda esta no início apenas com a parte de inserir dados
