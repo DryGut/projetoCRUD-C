@@ -12,10 +12,8 @@ Repositório de construção de um CRUD em linguagem C
 
 CRUD em linguagem C
 
-## Autores
+##Autores
 
 | [<img src="https://avatars.githubusercontent.com/u/91312588?s=96&v=4" width=115><br><sub>Renato Magalhaes Martins</sub>](https://github.com/DryGut) | 
-
 | [<img src="https://avatars.githubusercontent.com/u/102804996?v=4" width=115><br><sub>Marley Pinheiro Martins</sub>](https://github.com/marleypm16)  | 
-
 | :---: | :---: | :---: |
