@@ -5,7 +5,7 @@
 #include <assert.h>
 //constante para definir o tamanho das strings
 #define TAM 50
-
+FILE *arq;
 //estrutura dos dados
 typedef struct {
 int id;
@@ -32,6 +32,7 @@ void inserir(struct Lista* li, int pos, cadastro cad);
 bool vazia(struct Lista* li);
 void imprimir(struct Lista* li);
 void buscar(struct Lista* li, int pos);
+void salvar(struct Lista* li);
 
 //função que criará a lista
 struct Lista* criar(){
@@ -137,7 +138,24 @@ void imprimir(struct Lista* li){
     aux = aux->prox;
   }
 }
-
+//função para salvar os dados
+void salvar(struct Lista* li){
+  
+  assert(li != NULL);              //verifica se a lista esta vazia
+  struct No* aux = li->inicio;      //coloca o ponteiro no inicio da lista
+  arq = fopen("cad1.txt", "w");           //abre o arquivo
+  fprintf(arq, "Dados Cadastrados");
+  for(int i=0; i<li->tamanho; i++){
+    fprintf(arq, "\nNome: ");
+    fputs(aux->cad.name, arq);
+    fprintf(arq, "Endereço: ");
+    fputs(aux->cad.address, arq);
+    fprintf(arq, "Telefone: ");
+    fputs(aux->cad.phone, arq);
+    aux = aux->prox;
+  }
+  fclose(arq);    //fecha o arquivo
+}
 //programa principal
 int main(){
   struct Lista* registros = criar();
@@ -150,9 +168,11 @@ int main(){
     printf("\n|               MENU            |");
     printf("\n=================================");
     printf("\n|   Selecione a Opção Desejada  |");
-    printf("\n|   [1] - Para Inclusão         |");
-    printf("\n|   [2] - Para Imprimir Todos   |");
-    printf("\n|   [3] - Para Imprimir Esp     |");
+    printf("\n| [1] - Para Inclusão           |");
+    printf("\n| [2] - Para Imprimir Todos     |");
+    printf("\n| [3] - Para Imprimir Especifico|");
+    printf("\n| [4] - Para Salvar o Processo  |");
+    printf("\n| [5] - Para SAIR               |");
     printf("\n=================================");
     printf("\nDigite a Opção Desejada: ");
     scanf("%d", &opcao);
@@ -170,9 +190,14 @@ int main(){
       case 3:
         printf("Digite o Registro: ");
         scanf("%d", &reg);
-        obter(registros, reg);
+        buscar(registros, reg);
+        break;
+      case 4:
+        salvar(registros);
+        break;
+      case 5:
         break;
       }
-    }while(opcao != 3);
+    }while(opcao != 5);
   return 0;
 }
