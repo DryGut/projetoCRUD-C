@@ -7,16 +7,16 @@
 #define TAM 50
 FILE *arq;
 //estrutura dos dados
-typedef struct {
+typedef struct{
 int id;
 char name[TAM];
 char address[TAM];
 char phone[TAM];
-}cadastro;
+}CADASTRO;
 
 //no para manipular a lista
 struct No{
-cadastro cad;                //instancia a struct para ser inserida
+CADASTRO cad;                //instancia a struct para ser inserida
 struct No* prox;            //struct que apontará para o proximo nó
 };
 
@@ -28,7 +28,7 @@ int tamanho;              //tamanho da lista
 
 //escopo das funções
 struct Lista* criar();
-void inserir(struct Lista* li, int pos, cadastro cad);
+void inserir(struct Lista* li, int pos, CADASTRO cad);
 bool vazia(struct Lista* li);
 void imprimir(struct Lista* li);
 void buscar(struct Lista* li, int pos);
@@ -58,7 +58,7 @@ bool vazia(struct Lista* li){
 }
 
 //função para inserir os dados na lista
-void inserir(struct Lista* li, int pos, cadastro cad){
+void inserir(struct Lista* li, int pos, CADASTRO cad){
 
   assert(li != NULL);//verifica se o ponteiro não é nulo
   assert(pos >= 0 && pos <= li->tamanho);//verifica a posição de inserção
@@ -98,10 +98,10 @@ void buscar(struct Lista* li, int pos){
 }
 
 //função que irá gerar os dados da estrutura
-cadastro montar_cad(){
+CADASTRO montar_cad(){
  
   //cria o vetor e sua alocação na memória
-  cadastro *cad = (cadastro*) malloc(sizeof(cadastro));
+  CADASTRO *cad = (CADASTRO*) malloc(sizeof(CADASTRO));
   /*
    * bloco que irá coletar os dados
    */
@@ -159,7 +159,7 @@ void salvar(struct Lista* li){
 //programa principal
 int main(){
   struct Lista* registros = criar();
-  cadastro cad;
+  CADASTRO cad;
   int opcao;
   int reg;
   do{
