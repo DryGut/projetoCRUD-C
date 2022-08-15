@@ -7,7 +7,7 @@
 #define TAM 50
 FILE *arq;
 //estrutura dos dados
-typedef struct{
+typedef struct {
 int id;
 char name[TAM];
 char address[TAM];
@@ -33,7 +33,7 @@ bool vazia(struct Lista* li);
 void imprimir(struct Lista* li);
 void buscar(struct Lista* li, int pos);
 void salvar(struct Lista* li);
-
+int posicao(struct Lista* li);
 //função que criará a lista
 struct Lista* criar(){
 
@@ -180,7 +180,7 @@ int main(){
     switch(opcao){
       case 1:
         cad = montar_cad();
-        inserir(registros, 0, cad);
+        inserir(registros, cad.id, cad); //O id inicia em 0 por questões de indice da lista.
         system("clear");
         break;
       case 2:
@@ -196,6 +196,7 @@ int main(){
         salvar(registros);
         break;
       case 5:
+        system("clear"); //podendo ser trocado por 'cls' caso seja um sistema windows
         break;
       }
     }while(opcao != 5);
