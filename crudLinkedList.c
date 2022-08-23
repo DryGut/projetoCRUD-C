@@ -3,9 +3,11 @@
 #include <string.h>
 #include <stdbool.h>
 #include <assert.h>
+
 //constante para definir o tamanho das strings
 #define TAM 50
 FILE *arq;
+
 //estrutura dos dados
 typedef struct {
 int id;
@@ -34,6 +36,7 @@ void imprimir(struct Lista* li);
 void buscar(struct Lista* li, int pos);
 void salvar(struct Lista* li);
 int posicao(struct Lista* li);
+int remover(struct Lista* li, int pos);
 //função que criará a lista
 struct Lista* criar(){
 
@@ -79,6 +82,31 @@ void inserir(struct Lista* li, int pos, CADASTRO cad){
     aux->prox = novo_no;
   }
   li->tamanho++;
+}
+
+//função para remover um item da lista
+int remover(struct Lista* li, int pos){
+  
+  assert(vazia(li) == false);
+  assert(pos >= 0 && pos < li->tamanho);
+
+  struct No* ant = NULL;
+  struct No* aux = li->inicio;
+  for(int i=0; i<pos; i++){
+    ant = aux;
+    aux = aux->prox;
+  }
+  
+  if(ant == NULL){
+    li->inicio = aux->prox;
+  }else{
+    ant->prox = aux->prox;
+  }
+  
+  int elemento = aux->cad.id;
+  li->tamanho--;
+  free(aux);
+  return elemento;
 }
 
 //função para obter o elemento da lista conforme o indice passado
@@ -141,9 +169,13 @@ void imprimir(struct Lista* li){
 //função para salvar os dados
 void salvar(struct Lista* li){
   
-  assert(li != NULL);              //verifica se a lista esta vazia
-  struct No* aux = li->inicio;      //coloca o ponteiro no inicio da lista
-  arq = fopen("cad1.txt", "w");           //abre o arquivo
+  assert(li != NULL);                     //verifica se a lista esta vazia
+  struct No* aux = li->inicio;       //coloca o ponteiro no inicio da lista
+  if(arq != NULL){
+    arq = fopen("cad1.txt", "a");
+  }else{
+    arq = fopen("cad1.txt", "w");      //abre o arquivo
+  }
   fprintf(arq, "Dados Cadastrados");
   for(int i=0; i<li->tamanho; i++){
     fprintf(arq, "\nNome: ");
@@ -165,14 +197,15 @@ int main(){
   do{
     system("echo \033[92m");//define a cor do menu
     printf("\n=================================");
-    printf("\n|               MENU            |");
+    printf("\n|             MENU              |");
     printf("\n=================================");
     printf("\n|   Selecione a Opção Desejada  |");
     printf("\n| [1] - Para Inclusão           |");
     printf("\n| [2] - Para Imprimir Todos     |");
     printf("\n| [3] - Para Imprimir Especifico|");
-    printf("\n| [4] - Para Salvar o Processo  |");
-    printf("\n| [5] - Para SAIR               |");
+    printf("\n| [4] - Deletar Cadastro        |");
+    printf("\n| [5] - Para Salvar o Processo  |");
+    printf("\n| [6] - Para SAIR               |");
     printf("\n=================================");
     printf("\nDigite a Opção Desejada: ");
     scanf("%d", &opcao);
@@ -188,17 +221,22 @@ int main(){
         imprimir(registros);
         break;
       case 3:
-        printf("Digite o Registro: ");
+        printf("Informe o Registro: ");
         scanf("%d", &reg);
         buscar(registros, reg);
         break;
       case 4:
-        salvar(registros);
+        printf("Informe o Registro: ");
+        scanf("%d", &reg);
+        remover(registros, reg);
         break;
       case 5:
-        system("clear"); //podendo ser trocado por 'cls' caso seja um sistema windows
+        salvar(registros);
+        break;
+      case 6:
+        system("clear");
         break;
       }
-    }while(opcao != 5);
+    }while(opcao != 6);
   return 0;
 }
