@@ -37,6 +37,8 @@ void buscar(struct Lista* li, int pos);
 void salvar(struct Lista* li);
 int posicao(struct Lista* li);
 int remover(struct Lista* li, int pos);
+void update(struct Lista* li, int velho, CADASTRO novo);
+
 //função que criará a lista
 struct Lista* criar(){
 
@@ -152,6 +154,23 @@ CADASTRO montar_cad(){
   return *cad;
 }
 
+//função para atualizar registros
+void update(struct Lista* li, int velho, CADASTRO novo){
+  
+  int pos = 0;
+  struct No* aux = li->inicio;
+  while(aux->prox != NULL){
+    if(aux->cad.id == velho){
+      remover(li, velho);
+      novo = montar_cad();
+      inserir(li, velho, novo);
+      printf("Cadastro Atualizado com Sucesso");
+    }
+    aux = aux->prox;
+    pos++;
+  }
+}
+
 //função que irá imprimir os dados armazenados na lista
 void imprimir(struct Lista* li){
 
@@ -170,12 +189,9 @@ void imprimir(struct Lista* li){
 void salvar(struct Lista* li){
   
   assert(li != NULL);                     //verifica se a lista esta vazia
-  struct No* aux = li->inicio;       //coloca o ponteiro no inicio da lista
-  if(arq != NULL){
-    arq = fopen("cad1.txt", "a");
-  }else{
-    arq = fopen("cad1.txt", "w");      //abre o arquivo
-  }
+  struct No* aux = li->inicio;           //coloca o ponteiro no inicio da lista
+  arq = fopen("cad1.txt", "w");         //abre o arquivo
+  
   fprintf(arq, "Dados Cadastrados");
   for(int i=0; i<li->tamanho; i++){
     fprintf(arq, "\nNome: ");
@@ -204,8 +220,9 @@ int main(){
     printf("\n| [2] - Para Imprimir Todos     |");
     printf("\n| [3] - Para Imprimir Especifico|");
     printf("\n| [4] - Deletar Cadastro        |");
-    printf("\n| [5] - Para Salvar o Processo  |");
-    printf("\n| [6] - Para SAIR               |");
+    printf("\n| [5] - Atualizar Cadastro      |");
+    printf("\n| [6] - Salvar Cadastros        |");
+    printf("\n| [7] - Para SAIR               |");
     printf("\n=================================");
     printf("\nDigite a Opção Desejada: ");
     scanf("%d", &opcao);
@@ -231,12 +248,17 @@ int main(){
         remover(registros, reg);
         break;
       case 5:
-        salvar(registros);
+        printf("Informe o Registro: ");
+        scanf("%d", &reg);
+        update(registros, reg, cad);
         break;
       case 6:
+        salvar(registros);
+        break;
+      case 7:
         system("clear");
         break;
       }
-    }while(opcao != 6);
+    }while(opcao != 7);
   return 0;
 }
